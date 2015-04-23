@@ -1,0 +1,29 @@
+$Id: README 14 2004-07-23 08:28:41Z sam $
+
+What is FLESSD?
+
+   FLESSD is a free reimplementation of FMOD (http://www.fmod.org/), a very
+commonly used music playing and sound effects library. Unfortunately FMOD is
+not free, and its author is extremely reluctant to opensourcing it. Moreover,
+it only supports a limited number of platforms. FLESSD aims to fix these two
+problems.
+
+
+Is FLESSD reimplemented from scratch?
+
+   Yes and no. The only similarity between FMOD and FLESSD is the interface
+(ie. the header file). Hoewever, I did not write everything from scratch:
+FLESSD makes extensive use of the SDL_mixer and SDL_audio libraries.
+
+
+Will FLESSD be any better than FMOD?
+
+   Though it may happen accidentally, I do not really plan to improve on
+performances. The FMOD author claims to have the best audio engine available
+on each platform, and this will probably remain the case for platforms that
+are supported by FMOD. However this is simply not true because FMOD only
+supports a handful of platforms; no BeOS, no BSD Unix, no QNX, and so on. If
+you need -real- portability, you will want FLESSD. If you want freedom, you
+will want FLESSD. Otherwise, you will probably just stick with FMOD, which is
+technically very good..
+

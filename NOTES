@@ -1,0 +1,682 @@
+$Id: NOTES 28 2004-07-27 08:07:45Z sam $
+
+
+Projects using FMOD
+===================
+
+   Name               Works?  URL
+  ---------------------------------------------------------------------------
+   Blender [1] [4]     No     http://www.blender.org/
+   CaRaCaL             No     http://caracal.sourceforge.net/
+   Delirium            No     http://koti.mbnet.fi/lsoft/Delirium/Delirium.html
+   DevLib              ???    http://www.devlib-central.org/
+   dmc                 No     http://erat.org/
+   Eclipse 2D          ???    http://eclipseeng.sourceforge.net/
+   FMOD examples
+     3d                No     -
+     dsp               No     -
+     fsb               No     -
+     multiple          No     -
+     netstream         No     -
+     record            No     -
+     simple            No     -
+     simplest          No     -
+     stream            No     -
+     stream2           No     -
+   GLX [4]             No     http://glx.upir.org/
+   IRE [3] [4]         ???    http://ire.sourceforge.net/
+   Jetstream [2]       ???    http://jetstream.babylonia.flatirons.org/
+   KOPS                No     http://jet.ro/kops/
+   MTP Target          No     http://www.mtp-target.org/
+   Musik               No     http://musik.berlios.de/
+   Orion3D             ???    http://orion3d.sourceforge.net/orion3d/
+   Paradroid           No     http://paradroid.sourceforge.net/
+   Possible Worlds [4] No     http://possibleworlds.sourceforge.net/
+   Quadrant Epsilon    ???    http://sourceforge.net/projects/qepsilon/
+   Racer [4]           No     http://www.racer.nl/
+   Robot Battle        ???    http://dev.robotbattle.com/
+   Stoned              ???    http://stoned.cute-ninjas.com/
+   Super Mario War     Yes    http://jnrdev.weed-crew.net/smw/
+   Tom                 ???    http://www.prato.linux.it/~lmasetti/tom/
+   YaRP                No     http://yarp.sourceforge.net/index_i.html
+
+[1] Can also use SDL and OpenAL
+[2] FMOD disabled because it is not opensource
+[3] Uses FMOD for Ogg streaming, but can also use Alogg.
+[4] Use an obsolete version of FMOD, with non-existent functions such as
+    FSOUND_Stream_OpenFile() and FSOUND_Sample_SetLoopMode().
+
+http://lists.gnu.org/archive/html/savannah-hackers/2003-09/msg00974.html
+
+
+Other stuff
+===========
+
+   http://xsist10.rucus.net/tutorials/Sound%20System/SoundSystem%5B101%5D.html
+
+Functions implemented
+=====================
+
+   Fully implemented:
+   ok FSOUND_CD_Play
+   ok FSOUND_CD_SetPlayMode
+   ok FSOUND_CD_Stop
+   ok FSOUND_CD_SetPaused
+   ok FSOUND_CD_SetTrackTime
+   ok FSOUND_CD_OpenTray
+   ok FSOUND_CD_GetPaused
+   ok FSOUND_CD_GetTrack
+   ok FSOUND_CD_GetNumTracks
+   ok FSOUND_CD_GetTrackLength
+   ok FSOUND_GetVersion
+   ok FSOUND_Sample_GetMode
+
+   Partially implemented:
+   !! FSOUND_SetDriver
+   !! FSOUND_SetHWND
+   !! FSOUND_GetNumDrivers
+   !! FSOUND_GetDriverName
+   !! FSOUND_GetDriverCaps
+   !! FSOUND_Close
+   !! FSOUND_Init
+   !! FSOUND_PlaySound
+   !! FSOUND_Sample_Load
+   !! FSOUND_Sample_SetMode
+   !! FSOUND_SetVolume
+   !! FSOUND_SetVolumeAbsolute
+   !! FSOUND_StopSound
+
+Function usage survey
+=====================
+
+    find -type f -name '*.[cChH]' -o -name '*.[cChH][pPxX][pPxX]' | \
+        xargs sed -ne 's/.*\(F\(MUSIC\|SOUND\)_[0-9A-Za-z_]*\) *(.*/\1/p' | \
+        sort | uniq -c | sort -n
+
+   Blender:
+   -- 1 FSOUND_3D_Listener_SetAttributes
+   -- 1 FSOUND_3D_Update
+   !! 1 FSOUND_Close
+   -- 1 FSOUND_DSP_GetFFTUnit
+   -- 1 FSOUND_DSP_GetSpectrum
+   -- 1 FSOUND_GetError
+   -- 1 FSOUND_GetFrequency
+   -- 1 FSOUND_GetMaxChannels
+   -- 1 FSOUND_GetMixer
+   !! 1 FSOUND_GetNumDrivers
+   -- 1 FSOUND_GetNumHardwareChannels
+   -- 1 FSOUND_GetOutput
+   -- 1 FSOUND_GetOutputRate
+   !! 1 FSOUND_Init
+   -- 1 FSOUND_IsPlaying
+   !! 1 FSOUND_PlaySound
+   -- 1 FSOUND_Sample_SetLoopPoints
+   -- 1 FSOUND_SetFrequency
+   -- 1 FSOUND_SetMaxHardwareChannels
+   -- 1 FSOUND_SetMinHardwareChannels
+   -- 1 FSOUND_SetSFXMasterVolume
+   !! 1 FSOUND_SetVolume
+   -- 2 FSOUND_3D_Listener_SetDopplerFactor
+   -- 2 FSOUND_3D_SetAttributes
+   ok 2 FSOUND_CD_Play
+   ok 2 FSOUND_CD_SetPaused
+   ok 2 FSOUND_CD_SetPlayMode
+   -- 2 FSOUND_CD_SetVolume
+   ok 2 FSOUND_CD_Stop
+   -- 2 FSOUND_DSP_SetActive
+   !! 2 FSOUND_Sample_Load
+   ?? 3 FSOUND_Sample_SetLoopMode
+   !! 3 FSOUND_StopSound
+   -- 6 FSOUND_SetLoopMode
+
+   CaRaCaL:
+   -- 1 FMUSIC_GetGlobalVolume
+   -- 1 FMUSIC_GetNumChannels
+   -- 1 FMUSIC_GetNumInstruments
+   -- 1 FMUSIC_GetPattern
+   -- 1 FMUSIC_GetPatternLength
+   -- 1 FMUSIC_GetRow
+   -- 1 FMUSIC_GetTime
+   -- 1 FMUSIC_OptimizeChannels
+   -- 1 FMUSIC_SetRowCallback
+   -- 1 FMUSIC_SetSample
+   -- 1 FMUSIC_SetZxxCallback
+   -- 1 FMUSIC_StopAllSongs
+   -- 2 FMUSIC_GetBPM
+   -- 2 FMUSIC_GetMasterVolume
+   -- 2 FMUSIC_GetNumPatterns
+   -- 2 FMUSIC_GetNumSamples
+   -- 2 FMUSIC_GetPaused
+   -- 2 FMUSIC_GetSpeed
+   -- 2 FMUSIC_IsFinished
+   -- 2 FMUSIC_IsPlaying
+   -- 2 FMUSIC_LoadSongMemory
+   -- 2 FMUSIC_SetInstCallback
+   -- 2 FMUSIC_SetOrderCallback
+   -- 2 FMUSIC_SetPanSeperation
+   -- 2 FMUSIC_SetPaused
+   -- 2 FMUSIC_SetReverb
+   -- 3 FMUSIC_GetNumOrders
+   -- 3 FMUSIC_GetSample
+   -- 3 FMUSIC_SetOrder
+   -- 4 FMUSIC_GetName
+   -- 4 FMUSIC_SetMasterVolume
+   -- 5 FMUSIC_GetType
+   -- 6 FMUSIC_StopSong
+   -- 7 FMUSIC_FreeSong
+   -- 8 FMUSIC_GetOrder
+   -- 8 FMUSIC_PlaySong
+   -- 9 FMUSIC_LoadSong
+
+   Delirium:
+   !! 1 FSOUND_Close
+   -- 1 FSOUND_DSP_Create
+   -- 1 FSOUND_DSP_Free
+   -- 1 FSOUND_DSP_SetActive
+   -- 1 FSOUND_GetError
+   -- 1 FSOUND_GetFrequency
+   -- 1 FSOUND_GetMixer
+   !! 1 FSOUND_Init
+   !! 1 FSOUND_Sample_Load
+   -- 1 FSOUND_SetFrequency
+   -- 1 FSOUND_SetOutput
+   -- 1 FSOUND_SetPan
+   -- 1 FSOUND_Stream_Open
+   -- 1 FSOUND_Stream_Play
+   -- 1 FSOUND_Stream_SetEndCallback
+   ok 2 FSOUND_GetVersion
+   !! 2 FSOUND_PlaySound
+   -- 2 FSOUND_Stream_Close
+   -- 3 FSOUND_DSP_GetBufferLengthTotal
+   -- 4 FSOUND_DSP_GetBufferLength
+   -- 4 FSOUND_SetSFXMasterVolume
+   !! 5 FSOUND_SetVolumeAbsolute
+
+   dmc:
+   -- 1 FSOUND_DSP_GetFFTUnit
+   -- 1 FSOUND_DSP_GetSpectrum
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   !! 1 FSOUND_SetDriver
+   -- 1 FSOUND_SetOutput
+   !! 1 FSOUND_SetVolume
+   -- 1 FSOUND_Stream_Close
+   -- 1 FSOUND_Stream_GetLengthMs
+   -- 1 FSOUND_Stream_Open
+   -- 1 FSOUND_Stream_PlayEx
+   -- 2 FSOUND_Close
+   -- 2 FSOUND_Stream_GetTime
+   -- 2 FSOUND_Stream_SetEndCallback
+   -- 2 FSOUND_Stream_SetTime
+   -- 3 FSOUND_SetPaused
+   -- 4 FSOUND_GetError
+   -- 1 FMUSIC_FreeSong
+   -- 1 FMUSIC_GetMasterVolume
+   -- 1 FMUSIC_GetNumOrders
+   -- 1 FMUSIC_GetRow
+   -- 1 FMUSIC_GetTime
+   -- 1 FMUSIC_IsPlaying
+   -- 1 FMUSIC_LoadSong
+   -- 1 FMUSIC_PlaySong
+   -- 1 FMUSIC_SetLooping
+   -- 1 FMUSIC_SetMasterVolume
+   -- 1 FMUSIC_SetPaused
+   -- 1 FMUSIC_StopSong
+   -- 2 FMUSIC_GetOrder
+   -- 2 FMUSIC_SetOrder
+
+   Eclipse 2D:
+   -- 1 FMUSIC_FreeSong
+   -- 1 FMUSIC_PlaySong
+   -- 1 FMUSIC_SetLooping
+   -- 1 FMUSIC_SetMasterVolume
+   -- 2 FMUSIC_LoadSong
+   -- 2 FMUSIC_LoadSongEx
+
+   FMOD examples           
+     3d
+   -- 1 FSOUND_3D_Listener_SetAttributes
+   !! 1 FSOUND_Close
+   -- 1 FSOUND_GetChannelsPlaying
+   !! 1 FSOUND_GetDriverCaps
+   !! 1 FSOUND_GetDriverName
+   -- 1 FSOUND_GetMixer
+   -- 1 FSOUND_GetNumHWChannels
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   !! 1 FSOUND_PlaySound
+   !! 1 FSOUND_Sample_SetMode
+   !! 1 FSOUND_SetDriver
+   -- 1 FSOUND_SetMixer
+   !! 1 FSOUND_SetVolume
+   -- 1 FSOUND_Update
+   -- 2 FSOUND_3D_SetAttributes
+   -- 2 FSOUND_GetDriver
+   !! 2 FSOUND_GetNumDrivers
+   -- 2 FSOUND_GetOutput
+   -- 2 FSOUND_GetPaused
+   -- 2 FSOUND_PlaySoundEx
+   -- 2 FSOUND_Sample_SetMinMaxDistance
+   -- 2 FSOUND_SetPaused
+   -- 3 FSOUND_Reverb_SetProperties
+   -- 3 FSOUND_Sample_Free
+   !! 3 FSOUND_Sample_Load
+   -- 6 FSOUND_GetError
+   -- 7 FSOUND_SetOutput
+
+     dsp
+   !! 1 FSOUND_Close
+   -- 1 FSOUND_GetCPUUsage
+   -- 1 FSOUND_GetDriver
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   !! 1 FSOUND_PlaySound
+   !! 1 FSOUND_Sample_SetMode
+   -- 1 FSOUND_SetBufferSize
+   !! 1 FSOUND_SetVolume
+   -- 2 FSOUND_DSP_Create
+   -- 2 FSOUND_DSP_Free
+   -- 2 FSOUND_DSP_GetBufferLength
+   -- 2 FSOUND_DSP_SetActive
+   -- 2 FSOUND_FX_SetEcho
+   -- 2 FSOUND_GetMixer
+   -- 2 FSOUND_PlaySoundEx
+   -- 2 FSOUND_Sample_Free
+   !! 2 FSOUND_Sample_Load
+   -- 3 FSOUND_DSP_MixBuffers
+   -- 3 FSOUND_GetError
+   -- 3 FSOUND_SetPaused
+   -- 4 FSOUND_FX_SetParamEQ
+   -- 4 FSOUND_GetOutput
+   -- 5 FSOUND_FX_Enable
+
+     fsb
+   !! 1 FSOUND_GetDriverName
+   -- 1 FSOUND_GetOutput
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   !! 1 FSOUND_PlaySound
+   !! 1 FSOUND_SetDriver
+   -- 2 FSOUND_GetError
+   !! 2 FSOUND_GetNumDrivers
+   -- 2 FSOUND_SetOutput
+   !! 3 FSOUND_Close
+   -- 6 FSOUND_Sample_SetDefaultsEx
+   -- 1 FMUSIC_FreeSong
+   -- 1 FMUSIC_LoadSongEx
+   -- 2 FMUSIC_GetOpenState
+   -- 7 FMUSIC_GetSample
+
+     multiple
+   !! 2 FSOUND_Close
+   !! 2 FSOUND_GetDriverName
+   ok 2 FSOUND_GetVersion
+   !! 2 FSOUND_Init
+   !! 2 FSOUND_PlaySound
+   -- 2 FSOUND_Sample_Free
+   !! 2 FSOUND_Sample_Load
+   !! 2 FSOUND_Sample_SetMode
+   !! 2 FSOUND_SetDriver
+   -- 4 FSOUND_GetError
+   !! 4 FSOUND_GetNumDrivers
+   -- 4 FSOUND_SetOutput
+
+     netstream
+   !! 1 FSOUND_GetDriverName
+   -- 1 FSOUND_GetOutput
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   !! 1 FSOUND_SetDriver
+   -- 1 FSOUND_SetPaused
+   -- 1 FSOUND_Stream_Close
+   -- 1 FSOUND_Stream_GetOpenState
+   -- 1 FSOUND_Stream_Net_GetLastServerStatus
+   -- 1 FSOUND_Stream_Net_GetStatus
+   -- 1 FSOUND_Stream_Net_SetBufferProperties
+   -- 1 FSOUND_Stream_Net_SetMetadataCallback
+   -- 1 FSOUND_Stream_Open
+   -- 1 FSOUND_Stream_PlayEx
+   -- 1 FSOUND_Stream_SetBufferSize
+   -- 2 FSOUND_GetError
+   !! 2 FSOUND_GetNumDrivers
+   -- 2 FSOUND_SetOutput
+   !! 3 FSOUND_Close
+
+     record
+   -- 1 FSOUND_DSP_Create
+   -- 1 FSOUND_DSP_Free
+   -- 1 FSOUND_DSP_SetActive
+   -- 1 FSOUND_GetCurrentLevels
+   -- 1 FSOUND_GetDriver
+   !! 1 FSOUND_GetDriverName
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   -- 1 FSOUND_IsPlaying
+   -- 1 FSOUND_Record_GetDriver
+   -- 1 FSOUND_Record_GetDriverName
+   -- 1 FSOUND_Record_SetDriver
+   -- 1 FSOUND_Sample_Alloc
+   !! 1 FSOUND_Sample_SetMode
+   !! 1 FSOUND_SetDriver
+   -- 1 FSOUND_SetMixer
+   !! 1 FSOUND_StopSound
+   -- 2 FSOUND_DSP_GetBufferLength
+   -- 2 FSOUND_GetCurrentPosition
+   -- 2 FSOUND_GetFrequency
+   -- 2 FSOUND_GetMixer
+   !! 2 FSOUND_GetNumDrivers
+   !! 2 FSOUND_PlaySound
+   -- 2 FSOUND_Record_GetNumDrivers
+   -- 2 FSOUND_Record_StartSample
+   -- 2 FSOUND_Record_Stop
+   -- 2 FSOUND_Sample_Free
+   -- 3 FSOUND_DSP_MixBuffers
+   -- 3 FSOUND_SetFrequency
+   -- 4 FSOUND_GetOutput
+   -- 5 FSOUND_GetError
+   -- 5 FSOUND_Record_GetPosition
+   -- 6 FSOUND_SetOutput
+   !! 7 FSOUND_Close
+
+     simple
+   !! 1 FSOUND_Close
+   -- 1 FSOUND_File_SetCallbacks
+   -- 1 FSOUND_GetCPUUsage
+   -- 1 FSOUND_GetChannelsPlaying
+   -- 1 FSOUND_GetDriver
+   !! 1 FSOUND_GetDriverName
+   -- 1 FSOUND_GetMixer
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   !! 1 FSOUND_PlaySound
+   -- 1 FSOUND_Sample_GetLength
+   -- 1 FSOUND_Sample_SetMaxPlaybacks
+   !! 1 FSOUND_Sample_SetMode
+   !! 1 FSOUND_SetDriver
+   -- 1 FSOUND_SetFrequency
+   -- 1 FSOUND_SetPan
+   !! 1 FSOUND_SetVolume
+   !! 2 FSOUND_GetNumDrivers
+   -- 2 FSOUND_GetOutput
+   -- 2 FSOUND_PlaySoundEx
+   -- 2 FSOUND_SetMemorySystem
+   -- 2 FSOUND_SetPaused
+   -- 3 FSOUND_Sample_Free
+   !! 3 FSOUND_Sample_Load
+   -- 6 FSOUND_GetError
+   -- 7 FSOUND_SetOutput
+   -- 1 FMUSIC_FreeSong
+   -- 1 FMUSIC_GetName
+   -- 1 FMUSIC_GetNumOrders
+   -- 1 FMUSIC_GetNumSamples
+   -- 1 FMUSIC_GetPaused
+   -- 1 FMUSIC_GetRow
+   -- 1 FMUSIC_IsFinished
+   -- 1 FMUSIC_PlaySong
+   -- 1 FMUSIC_SetInstCallback
+   -- 1 FMUSIC_SetLooping
+   -- 1 FMUSIC_SetMasterVolume
+   -- 1 FMUSIC_SetOrderCallback
+   -- 1 FMUSIC_StopSong
+   -- 2 FMUSIC_GetSample
+   -- 2 FMUSIC_GetTime
+   -- 2 FMUSIC_LoadSong
+   -- 4 FMUSIC_GetOrder
+
+     simplest
+   !! 1 FSOUND_Close
+   -- 1 FSOUND_GetCPUUsage
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   -- 2 FSOUND_GetError
+   -- 1 FMUSIC_FreeSong
+   -- 1 FMUSIC_GetName
+   -- 1 FMUSIC_LoadSong
+   -- 1 FMUSIC_PlaySong
+
+     stream
+   -- 1 FSOUND_File_SetCallbacks
+   -- 1 FSOUND_GetCPUUsage
+   !! 1 FSOUND_GetDriverName
+   -- 1 FSOUND_GetOutput
+   -- 1 FSOUND_GetPaused
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   -- 1 FSOUND_Sample_GetDefaults
+   -- 1 FSOUND_Sample_GetName
+   !! 1 FSOUND_SetDriver
+   -- 1 FSOUND_Stream_Close
+   -- 1 FSOUND_Stream_GetLength
+   -- 1 FSOUND_Stream_GetPosition
+   -- 1 FSOUND_Stream_GetSample
+   -- 1 FSOUND_Stream_SetBufferSize
+   -- 1 FSOUND_Stream_SetEndCallback
+   -- 1 FSOUND_Stream_SetSyncCallback
+   -- 2 FSOUND_GetError
+   !! 2 FSOUND_GetNumDrivers
+   -- 2 FSOUND_SetOutput
+   -- 2 FSOUND_SetPaused
+   -- 2 FSOUND_Stream_GetLengthMs
+   -- 2 FSOUND_Stream_Open
+   -- 2 FSOUND_Stream_PlayEx
+   -- 3 FSOUND_Stream_GetTime
+   !! 4 FSOUND_Close
+
+     stream2
+   !! 1 FSOUND_Close
+   !! 1 FSOUND_GetDriverName
+   -- 1 FSOUND_GetOutput
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   !! 1 FSOUND_SetDriver
+   -- 1 FSOUND_Stream_Close
+   -- 1 FSOUND_Stream_Create
+   -- 1 FSOUND_Stream_GetTime
+   -- 1 FSOUND_Stream_Play
+   -- 1 FSOUND_Stream_SetEndCallback
+   -- 2 FSOUND_DSP_Free
+   -- 2 FSOUND_DSP_SetActive
+   !! 2 FSOUND_GetNumDrivers
+   -- 2 FSOUND_Stream_CreateDSP
+   -- 3 FSOUND_GetError
+   -- 7 FSOUND_SetOutput
+
+   GLX:
+   !! 1 FSOUND_Close
+   !! 1 FSOUND_Init
+   -- 1 FSOUND_Sample_Free
+   !! 1 FSOUND_Sample_Load
+   -- 1 FSOUND_Stream_GetLength
+   ?? 1 FSOUND_Stream_OpenFile
+   -- 1 FSOUND_Stream_Play
+   -- 1 FSOUND_Stream_Stop
+   !! 2 FSOUND_PlaySound
+   !! 2 FSOUND_SetVolume
+   -- 2 FSOUND_Stream_Close
+   !! 3 FSOUND_StopSound
+
+   IRE:
+   !! 1 FSOUND_Close
+   -- 1 FSOUND_File_SetCallbacks
+   !! 1 FSOUND_Init
+   !! 1 FSOUND_PlaySound
+   !! 1 FSOUND_Sample_Load
+   -- 1 FSOUND_SetReserved
+   !! 1 FSOUND_SetVolume
+   -- 1 FSOUND_Stream_GetLength
+   -- 1 FSOUND_Stream_GetPosition
+   ?? 1 FSOUND_Stream_OpenFile
+   -- 1 FSOUND_Stream_Play
+   -- 1 FSOUND_Stream_Stop
+   !! 2 FSOUND_SetVolumeAbsolute
+   -- 2 FSOUND_Stream_Close
+
+   KOPS:
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_PlaySound
+   -- 1 FSOUND_Sample_Free
+   !! 1 FSOUND_Sample_Load
+   -- 1 FSOUND_SetFrequency
+   -- 1 FSOUND_SetPan
+   -- 1 FSOUND_SetPriority
+   -- 1 FSOUND_SetSFXMasterVolume
+   !! 1 FSOUND_SetVolume
+   !! 2 FSOUND_Close
+   -- 2 FSOUND_File_SetCallbacks
+   !! 2 FSOUND_Init
+   -- 3 FSOUND_GetError
+   -- 1 FMUSIC_FreeSong
+   -- 1 FMUSIC_GetNumChannels
+   -- 1 FMUSIC_LoadSong
+   -- 1 FMUSIC_PlaySong
+   -- 1 FMUSIC_SetMasterVolume
+   -- 1 FMUSIC_SetOrder
+   -- 2 FMUSIC_StopAllSongs
+
+   MTP Target:
+   -- 1 FSOUND_3D_Listener_SetAttributes
+   !! 1 FSOUND_Close
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   -- 1 FSOUND_Sample_Free
+   !! 1 FSOUND_Sample_Load
+   -- 1 FSOUND_SetLoopMode
+   -- 1 FSOUND_Stream_Close
+   -- 1 FSOUND_Update
+   -- 2 FSOUND_PlaySoundEx
+   -- 2 FSOUND_SetPaused
+   -- 2 FSOUND_Stream_SetEndCallback
+   -- 2 FSOUND_Stream_Stop
+   -- 3 FSOUND_3D_SetAttributes
+   -- 3 FSOUND_IsPlaying
+   -- 3 FSOUND_Stream_Open
+   -- 3 FSOUND_Stream_Play
+   !! 5 FSOUND_StopSound
+   -- 17 FSOUND_GetError
+
+   Musik:
+   !! 1 FSOUND_Close
+   -- 1 FSOUND_DSP_Create
+   -- 1 FSOUND_DSP_Free
+   !! 1 FSOUND_GetDriverName
+   -- 1 FSOUND_GetError
+   !! 1 FSOUND_GetNumDrivers
+   -- 1 FSOUND_GetOutput
+   ok 1 FSOUND_GetVersion
+   !! 1 FSOUND_Init
+   -- 1 FSOUND_SetBufferSize
+   !! 1 FSOUND_SetDriver
+   -- 1 FSOUND_SetFrequency
+   -- 1 FSOUND_SetSFXMasterVolume
+   -- 1 FSOUND_Stream_GetLength
+   -- 1 FSOUND_Stream_Net_GetStatus
+   -- 1 FSOUND_Stream_Net_SetBufferProperties
+   -- 1 FSOUND_Stream_Net_SetMetadataCallback
+   -- 1 FSOUND_Stream_PlayEx
+   -- 1 FSOUND_Stream_SetBufferSize
+   -- 1 FSOUND_Stream_Stop
+   -- 2 FSOUND_DSP_SetActive
+   -- 2 FSOUND_GetVolume
+   -- 2 FSOUND_Stream_GetOpenState
+   -- 2 FSOUND_Stream_GetTime
+   -- 2 FSOUND_Stream_Net_GetLastServerStatus
+   -- 2 FSOUND_Stream_Net_SetProxy
+   -- 2 FSOUND_Stream_SetTime
+   -- 3 FSOUND_SetPaused
+   -- 3 FSOUND_Stream_GetLengthMs
+   -- 3 FSOUND_Stream_Open
+   !! 5 FSOUND_SetVolume
+   -- 5 FSOUND_Stream_Close
+   -- 7 FSOUND_SetOutput
+
+   Paradroid:
+   -- 1 FSOUND_GetSFXMasterVolume
+   -- 1 FSOUND_Sample_Upload
+   !! 1 FSOUND_SetHWND
+   -- 1 FSOUND_SetSFXMasterVolume
+   !! 1 FSOUND_SetVolumeAbsolute
+   -- 1 FSOUND_Stream_SetEndCallback
+   -- 2 FSOUND_GetError
+   !! 2 FSOUND_Init
+   -- 2 FSOUND_IsPlaying
+   !! 2 FSOUND_Sample_Load
+   !! 2 FSOUND_SetDriver
+   -- 2 FSOUND_SetPan
+   !! 3 FSOUND_Close
+   !! 3 FSOUND_GetDriverName
+   ok 3 FSOUND_Sample_GetMode
+   !! 3 FSOUND_StopSound
+   !! 4 FSOUND_GetNumDrivers
+   !! 4 FSOUND_PlaySound
+   !! 4 FSOUND_Sample_SetMode
+
+   Possible Worlds:
+   !! 1 FSOUND_Close
+   !! 1 FSOUND_Init
+   -- 1 FSOUND_Sample_GetLength
+   !! 1 FSOUND_Sample_Load
+   -- 1 FSOUND_Sample_SetLoopPoints
+   -- 1 FSOUND_SetPriority
+   -- 1 FSOUND_Stream_Close
+   ?? 1 FSOUND_Stream_OpenFile
+   -- 1 FSOUND_Stream_Play
+   -- 1 FSOUND_Stream_Stop
+   !! 2 FSOUND_PlaySound
+   ?? 2 FSOUND_Sample_SetLoopMode
+   -- 2 FSOUND_SetFrequency
+   !! 3 FSOUND_SetVolume
+   !! 4 FSOUND_StopSound
+   -- 1 FMUSIC_GetMasterVolume
+   -- 1 FMUSIC_IsPlaying
+   -- 1 FMUSIC_LoadSong
+   -- 1 FMUSIC_PlaySong
+   -- 1 FMUSIC_SetMasterVolume
+   -- 1 FMUSIC_StopSong
+   -- 2 FMUSIC_FreeSong
+
+   Racer:
+   -- 1 FSOUND_3D_Listener_SetAttributes
+   -- 1 FSOUND_3D_Listener_SetDopplerFactor
+   -- 1 FSOUND_3D_Listener_SetRolloffFactor
+   -- 1 FSOUND_3D_SetRolloffFactor
+   -- 1 FSOUND_3D_Update
+   !! 1 FSOUND_Close
+   !! 1 FSOUND_GetDriverName
+   -- 1 FSOUND_GetMaxChannels
+   !! 1 FSOUND_GetNumDrivers
+   ok 1 FSOUND_GetVersion
+   ?? 1 FSOUND_Sample_SetLoopMode
+   -- 1 FSOUND_SetBufferSize
+   -- 1 FSOUND_SetLoopMode
+   -- 1 FSOUND_SetMixer
+   -- 1 FSOUND_Update
+   -- 2 FSOUND_3D_SetAttributes
+   -- 2 FSOUND_Sample_Free
+   !! 2 FSOUND_Sample_Load
+   -- 2 FSOUND_Stream_Close
+   ?? 2 FSOUND_Stream_OpenFile
+   -- 2 FSOUND_Stream_SetEndCallback
+   -- 2 FSOUND_Stream_Stop
+   -- 3 FSOUND_GetError
+   !! 3 FSOUND_Init
+   -- 3 FSOUND_SetFrequency
+   !! 3 FSOUND_SetVolume
+   !! 3 FSOUND_StopSound
+   -- 3 FSOUND_Stream_Play
+   -- 4 FSOUND_Sample_GetLength
+   !! 5 FSOUND_PlaySound
+   -- 9 FSOUND_SetOutput
+
+   Super Mario War:
+   !! 1 FSOUND_Init
+   !! 1 FSOUND_Sample_Load
+   !! 2 FSOUND_Close
+   !! 6 FSOUND_PlaySound
+
+   YaRP:
+   !! 1 FSOUND_Init
+   -- 2 FSOUND_GetError
+   -- 1 FMUSIC_FreeSong
+   -- 1 FMUSIC_LoadSongMemory
+   -- 1 FMUSIC_PlaySong
+

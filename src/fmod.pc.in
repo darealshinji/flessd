@@ -1,0 +1,13 @@
+# Package Information for pkg-config
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: FMOD
+Description: FLESSD - Free reimplementation of FMOD
+Version: 3.73
+Libs: -L${libdir} -lfmod
+Libs.private: @SDL_LIBS@ @SDL_MIXER_LIBS@ @SDL_SOUND_LIBS@
+Cflags: -I${includedir}
