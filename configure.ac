@@ -1,10 +1,11 @@
-AC_INIT(include/fmod.h)
+AC_INIT([flessd], [0.0])
+AC_CONFIG_SRCDIR(include/fmod.h)
 
 AC_PREREQ(2.50)
 AC_CONFIG_AUX_DIR(autotools)
 AC_CANONICAL_SYSTEM
 
-AM_INIT_AUTOMAKE(flessd, 0.0)
+AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
 
 AC_PROG_CC
